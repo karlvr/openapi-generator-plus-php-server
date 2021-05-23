@@ -1,0 +1,31 @@
+class {{className name}}{{#if parentNativeType}} extends {{{parentNativeType}}}{{/if}} {
+
+{{#if discriminator}}
+	private ${{identifier discriminator.name}};
+{{/if}}
+{{#if discriminator}}
+{{#with discriminator}}
+	private ${{identifier name}};
+	
+{{/with}}
+{{/if}}
+{{#each properties}}
+	/**
+	{{#if description}}
+	 * {{{md description}}}
+	{{/if}}
+	 * @var {{{nativeType.serializedType}}}
+	 */
+	private ${{identifier name}};
+{{/each}}
+
+{{#each properties}}
+	public function get{{{capitalize (identifier name)}}}(): {{#unless required}}?{{/unless}}{{{nativeType.serializedType}}} {
+		return $this->{{{identifier name}}};
+	}
+	public function set{{{capitalize (identifier name)}}}({{{nativeType.serializedType}}} ${{{identifier name}}}) {
+		$this->{{{identifier name}}} = ${{{identifier name}}};
+	}
+
+{{/each}}
+}

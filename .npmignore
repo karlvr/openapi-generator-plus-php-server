@@ -1,0 +1,8 @@
+test
+src
+.eslintrc.js
+.nvmrc
+.vscode
+tsconfig.*
+/__tests__
+/test-output
